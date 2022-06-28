@@ -38,7 +38,7 @@ O único jogo de UNO desenvolvido em Delphi, jogo multiplayer atráves de client
 - Delphi 10.3.3, [Indy](https://www.indyproject.org/), MySQL
 
 ## Projeto
-Esta aplicação faz parte de um projeto onde trabalhei com mais duas pessoas: [Anderson Bruns](https://github.com/AndersonBruns/) e [Ricardo](https://github.com/ricardo-14).
+Esta aplicação faz parte de um projeto onde trabalhei com mais duas pessoas: [Anderson Bruns](https://github.com/AndersonBruns/) e [Ricardo Filho](https://github.com/ricardo-14).
 
 Na pasta "Projeto Final" contém o projeto pronto, compilando o cliente e servidor juntos, assim o usuário escolhe se vai criar uma sala (ser o servidor) ou se vai entrar em uma sala (ser o cliente).
 No diretório principal contém o executável final e a DLL necessária.
