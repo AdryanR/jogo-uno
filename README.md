@@ -22,12 +22,12 @@ O único jogo de UNO desenvolvido em Delphi, jogo multiplayer atráves de client
 
 <p align="center">
   <img
-    width="60%"
+    width="80%"
     alt="Lobby do jogo"
     src="https://user-images.githubusercontent.com/92650594/176306948-7148c3fb-1a0a-4381-bb60-1feaf9020e01.PNG"
   >
   <img
-    width="60%"
+    width="80%"
     alt="Tela do jogo em execução"
     src="https://user-images.githubusercontent.com/92650594/176306945-ac675ed8-d974-4086-bb2a-a55256d8385e.PNG"
   >
