@@ -1,0 +1,84 @@
+object frm_Espera: Tfrm_Espera
+  Left = 0
+  Top = 0
+  Anchors = []
+  BorderStyle = bsToolWindow
+  Caption = '   Jogo Uninho'
+  ClientHeight = 433
+  ClientWidth = 832
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  Menu = Menu
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnDeactivate = FormDeactivate
+  PixelsPerInch = 115
+  TextHeight = 16
+  object lblCodigoPartida: TLabel
+    Left = 16
+    Top = 88
+    Width = 796
+    Height = 225
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Jogo Uninho'
+    Color = 7012202
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+    Transparent = True
+    Layout = tlCenter
+  end
+  object FdConexao: TFDConnection
+    Params.Strings = (
+      'Database=dbapp'
+      'Server=dbapp0.cx5k8uuvmgxd.us-east-1.rds.amazonaws.com'
+      'User_Name=root'
+      'Password=KGAJNGJnj3939'
+      'DriverID=MySQL')
+    Left = 40
+    Top = 344
+  end
+  object RestClient: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'utf-8, *;q=0.8'
+    BaseURL = 'http://v6.ipv6-test.com/api/myip.php'
+    Params = <>
+    RaiseExceptionOn500 = False
+    Left = 712
+    Top = 368
+  end
+  object request: TRESTRequest
+    Client = RestClient
+    Params = <>
+    Response = RestResponse
+    SynchronizedEvents = False
+    Left = 768
+    Top = 368
+  end
+  object RestResponse: TRESTResponse
+    ContentType = 'text/html'
+    Left = 632
+    Top = 368
+  end
+  object Menu: TMainMenu
+    Left = 768
+    Top = 8
+    object CriarSala1: TMenuItem
+      Caption = 'Criar Sala'
+      OnClick = CriarSala1Click
+    end
+    object Entraremumasala1: TMenuItem
+      Caption = 'Entrar em uma sala'
+      OnClick = Entraremumasala1Click
+    end
+  end
+end

@@ -1,0 +1,20 @@
+unit uMonte;
+
+interface
+
+  uses uCarta, System.Generics.Collections;
+
+type
+  TMonte = class
+
+    private
+
+    public
+
+    property Monte
+
+  end;
+
+implementation
+
+end.

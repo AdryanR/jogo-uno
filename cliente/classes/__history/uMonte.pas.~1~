@@ -1,0 +1,16 @@
+unit uMonte;
+
+interface
+
+type
+  TMonte = class
+
+    private
+
+    public
+
+  end;
+
+implementation
+
+end.

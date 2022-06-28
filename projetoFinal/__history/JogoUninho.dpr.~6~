@@ -1,0 +1,25 @@
+program JogoUninho;
+
+uses
+  Vcl.Forms,
+  Vcl.Themes,
+  Vcl.Styles,
+  uBaralho in '..\servidor\classes\uBaralho.pas',
+  uCarta in '..\servidor\classes\uCarta.pas',
+  uJogador in '..\servidor\classes\uJogador.pas',
+  uJogo in '..\servidor\classes\uJogo.pas',
+  uMonte in '..\servidor\classes\uMonte.pas',
+  frm_principal in '..\forms\frm_principal.pas' {Form1},
+  formPServer in '..\servidor\forms\formPServer.pas' {frm_Jogo};
+
+{$R *.res}
+{$R JogoUnoResource.RES}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Metropolis UI Green');
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

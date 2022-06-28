@@ -1,0 +1,177 @@
+unit frm_principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL,
+  FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, Vcl.StdCtrls, Data.DB,
+  FireDAC.Comp.Client, Winsock, REST.Types, REST.Client, Data.Bind.Components,
+  Data.Bind.ObjectScope, FireDAC.DApt, Vcl.Menus, IdGlobal, FormPServer, formPrincipal, FormEscolheCor,
+  Vcl.Imaging.jpeg, Vcl.ExtCtrls;
+
+  type
+  TEsperaConexao = class(TThread)
+    procedure Execute; override;
+    constructor Cria();
+  end;
+
+
+type
+  Tfrm_Espera = class(TForm)
+    FdConexao: TFDConnection;
+    lblCodigoPartida: TLabel;
+    RestClient: TRESTClient;
+    request: TRESTRequest;
+    RestResponse: TRESTResponse;
+    Menu: TMainMenu;
+    CriarSala1: TMenuItem;
+    Entraremumasala1: TMenuItem;
+    procedure CriarSala1Click(Sender: TObject);
+    procedure Entraremumasala1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+    procedure IniciaJogoServer();
+    procedure IniciaJogoClient();
+    function obterIp : String;
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_Espera: Tfrm_Espera;
+
+implementation
+
+{$R *.dfm}
+
+{ TForm1 }
+
+procedure Tfrm_Espera.CriarSala1Click(Sender: TObject);
+begin
+  self.IniciaJogoServer;
+end;
+
+procedure Tfrm_Espera.Entraremumasala1Click(Sender: TObject);
+begin
+  IniciaJogoClient;
+end;
+
+procedure Tfrm_Espera.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure Tfrm_Espera.IniciaJogoClient;
+var
+resposta:String;
+qSelect:TFDQuery;
+ipClient:String;
+begin
+  resposta := InputBox('Conectar a sala, pronto?', 'Qual o código da sala?', '');
+  if (resposta <> '') then
+  begin
+  qSelect := TFDQuery.Create(self);
+  qSelect.Connection := FdConexao;
+  FdConexao.Connected := true;
+  qSelect.SQL.Add('select ipServer from conexao where codigoPartida = :codigoInformado');
+  qSelect.ParamByName('codigoInformado').AsString := resposta;
+
+  qSelect.Open;
+
+  if (qSelect.RecordCount > 0) then
+  begin
+     ipClient := qSelect.FindField('ipServer').AsString;
+     if (frm_Jogo = nil) then
+     begin
+      frm_Jogo := Tfrm_Jogo.Create(self);
+      //frmJogoServer.Server.Bindings.Clear;
+      frm_Jogo.Client.Host := ipClient;
+      frm_Jogo.Client.Port := 8080;
+      frm_Jogo.Client.Connect;
+      frm_Jogo.ShowModal;
+      //frm_Espera.Hide;
+     end;
+
+  end
+  else
+  begin
+    ShowMessage('Código de partida não encontrado, verifique e tente novamente ;)!');
+  end;
+ end;
+
+
+end;
+
+procedure Tfrm_Espera.IniciaJogoServer;
+var
+codigoPartida: integer;
+qInsert:TFDQuery;
+ipServer:String;
+slaaa:string;
+begin
+  codigoPartida:= Random(1000000); // código de 6 digitos da sala
+  lblCodigoPartida.Caption := 'Sua sala foi criada! ' +
+    'Envie o código: ' + IntToStr(codigoPartida) + ' Para seu oponente!';
+  ipServer := self.obterIp;
+  qInsert := TFDQuery.Create(self);
+  qInsert.Connection := FdConexao;
+  FdConexao.Connected := true;
+
+  qInsert.SQL.Add('insert into conexao (codigoPartida, ipServer) values (:codigoPartida, :ipServer)');
+  qInsert.ParamByName('codigoPartida').AsInteger := codigoPartida;
+  qInsert.ParamByName('ipServer').AsString := ipServer;
+
+  qInsert.ExecSQL;
+
+   if (frmJogoServer = nil) then
+   begin
+    frmJogoServer := TfrmJogoServer.Create(self);
+
+    //frmJogoServer.Server.Bindings.Clear;
+    with frmJogoServer.Server.Bindings.Add do
+    begin
+      frmJogoServer.Server.Bindings.Items[0].IP := ipServer;
+      frmJogoServer.Server.Bindings.Items[0].Port := 8080;
+      frmJogoServer.Server.Bindings.Items[0].IPVersion := Id_IPv6;
+    end;
+    frmJogoServer.Server.Active := true;
+   end;
+
+   TEsperaConexao.Cria;
+
+end;
+
+function Tfrm_Espera.obterIp: String;
+begin
+  request.Execute;
+  result := RestResponse.Content;
+end;
+
+{ TContaLabel }
+
+constructor TEsperaConexao.Cria;
+begin
+  Create(False);
+  FreeOnTerminate := True;
+end;
+
+procedure TEsperaConexao.Execute;
+begin
+  while (frmJogoServer.conectado = false) do
+  begin
+      Sleep(5000);
+      if (frmJogoServer.conectado = true) then
+      begin
+        frmJogoServer.ShowModal;
+        break;
+      end;
+    end;
+end;
+
+end.
+
+

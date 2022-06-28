@@ -1,0 +1,20 @@
+program JogoUninho;
+
+uses
+  Vcl.Forms,
+  Vcl.Themes,
+  Vcl.Styles,
+  frm_principal in '..\forms\frm_principal.pas' {Form1},
+  FormEscolheCor in '..\forms\FormEscolheCor.pas' {frmEscolheCor};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Metropolis UI Green');
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TfrmEscolheCor, frmEscolheCor);
+  Application.Run;
+end.

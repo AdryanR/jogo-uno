@@ -1,0 +1,28 @@
+program JogoUno;
+
+
+
+
+uses
+  Vcl.Forms,
+  Windows,
+  Sysutils,
+  classes,
+  formPrincipal in '..\forms\formPrincipal.pas' {Form1},
+  uCarta in '..\classes\uCarta.pas',
+  uJogador in '..\classes\uJogador.pas',
+  uBaralho in '..\classes\uBaralho.pas',
+  uMonte in '..\classes\uMonte.pas',
+  uJogo in '..\classes\uJogo.pas';
+
+{$R *.res}
+{$R JogoUnoResource.RES}
+
+
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

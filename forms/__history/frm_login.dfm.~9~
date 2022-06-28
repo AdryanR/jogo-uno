@@ -1,0 +1,86 @@
+object form_login: Tform_login
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = '   Jogo Uninho'
+  ClientHeight = 374
+  ClientWidth = 480
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'Segoe UI Semibold'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 115
+  TextHeight = 17
+  object lbl1: TLabel
+    Left = 8
+    Top = 8
+    Width = 465
+    Height = 57
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'O jogo vai come'#231'ar, prepare suas cartas!'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -24
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+  end
+  object lbeNick: TLabeledEdit
+    Left = 88
+    Top = 104
+    Width = 289
+    Height = 25
+    EditLabel.Width = 54
+    EditLabel.Height = 17
+    EditLabel.Caption = 'Seu nick:'
+    TabOrder = 0
+  end
+  object lbeSenha: TLabeledEdit
+    Left = 88
+    Top = 176
+    Width = 289
+    Height = 25
+    EditLabel.Width = 65
+    EditLabel.Height = 17
+    EditLabel.Caption = 'Sua senha:'
+    MaxLength = 8
+    PasswordChar = '*'
+    TabOrder = 1
+  end
+  object btnLogin: TButton
+    Left = 160
+    Top = 224
+    Width = 129
+    Height = 33
+    Caption = 'Vamos l'#225
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    OnClick = btnLoginClick
+  end
+  object btnFormCad: TButton
+    Left = 160
+    Top = 280
+    Width = 129
+    Height = 33
+    Caption = 'Cadastrar'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    OnClick = btnFormCadClick
+  end
+end

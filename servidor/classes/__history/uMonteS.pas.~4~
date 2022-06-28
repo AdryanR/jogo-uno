@@ -1,0 +1,26 @@
+unit uMonteS;
+
+interface
+
+  uses uCarta, System.Generics.Collections;
+
+type
+  TMonteS = class
+
+    private
+    FMonte: TList<TCarta>;
+
+    public
+
+    property Monte : TList<TCartaS> read FMonte write FMonte;
+
+  end;
+
+implementation
+
+{ TMonte }
+
+
+{ TMonte }
+
+end.

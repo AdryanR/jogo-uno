@@ -1,0 +1,26 @@
+unit uJogador;
+
+interface
+
+uses uCarta, System.Generics.Collections;
+
+type
+  TJogador = class
+
+    private
+
+    Fnome: String;
+    FbaralhoJogador: TList<TCarta>;
+
+    public
+
+    property nome : String read Fnome write Fnome;
+    property baralhoJogador : TList<TCarta> read Fbaralho write Fbaralho;
+
+  end;
+
+implementation
+
+{ TJogador }
+
+end.

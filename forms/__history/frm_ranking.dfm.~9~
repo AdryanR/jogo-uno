@@ -1,0 +1,59 @@
+object form_ranking: Tform_ranking
+  Left = 0
+  Top = 0
+  BorderStyle = bsToolWindow
+  Caption = '   Jogo Uninho: Ranking'
+  ClientHeight = 480
+  ClientWidth = 431
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 115
+  TextHeight = 16
+  object lblCodigoPartida: TLabel
+    Left = 8
+    Top = 0
+    Width = 415
+    Height = 89
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'RANKING GERAL'
+    Color = 7012202
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -40
+    Font.Name = 'REVOLUTION'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    Transparent = True
+    Layout = tlCenter
+  end
+  object dbGrid: TDBGrid
+    Left = 8
+    Top = 95
+    Width = 415
+    Height = 377
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object dsRanking: TDataSource
+    Left = 376
+    Top = 424
+  end
+  object qrRanking: TFDQuery
+    Connection = dmDados.FdConexao
+    Left = 312
+    Top = 424
+  end
+end

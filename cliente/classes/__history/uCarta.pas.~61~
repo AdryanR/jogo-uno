@@ -1,0 +1,86 @@
+unit uCarta;
+
+interface
+
+  uses System.Classes, System.SysUtils, Windows, Vcl.Forms;
+
+type
+  TCarta = class
+
+    private
+
+
+
+    Fcor: String;
+    FtipoEfeito: String;
+    Fnum: integer;
+    Fefeito: boolean;
+    Fnome: String;
+    FImageIndex: String;
+    function EnumerateResourceNames: string;
+
+
+    public
+
+
+    property nome : String read Fnome write Fnome;
+    property cor : String read Fcor write Fcor;
+    property num : integer read Fnum write Fnum;
+    property efeito : boolean read Fefeito write Fefeito;
+    property tipoEfeito : String read FtipoEfeito write FtipoEfeito;
+    property ImageIndex : String read FImageIndex write FImageIndex;
+
+    procedure DefineCartaByNome();
+
+    //procedure DefineCartaByName;
+
+  end;
+
+  var
+  ResourcesList: TStringList;
+
+implementation
+
+{ TCarta }
+
+{ TCarta }
+
+procedure TCarta.DefineCartaByNome;
+begin
+
+   for Loop := 0 to StringList.Count - 1 do
+   begin
+
+   end;
+   self.EnumerateResourceNames;
+
+
+end;
+
+{ TCarta }
+
+
+function EnumRCDataProc(hModule: HMODULE; lpszType, lpszName: PChar; lParam: NativeInt): BOOL; stdcall;
+begin
+  TStrings(lParam).Add(lpszName);
+  Result := True;
+end;
+
+function EnumerateResourceNames: string;
+var
+  ExecutableHandle: HMODULE;
+begin
+  ExecutableHandle := LoadLibrary(PChar(Application.ExeName));
+  try
+    ResourcesList := TStringList.Create;
+    try
+      EnumResourceNames(ExecutableHandle, RT_RCDATA, @EnumRCDataProc, NativeInt(ResourcesList));
+      Result := ResourcesList.Text;
+    finally
+    end;
+  finally
+  end;
+end;
+
+
+end.

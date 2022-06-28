@@ -1,0 +1,25 @@
+unit uMonte;
+
+interface
+
+  uses uCarta, System.Generics.Collections;
+
+type
+  TMonte = class
+
+    private
+    FMonte: TList<TCarta>;
+    procedure SetMonte(const Value: TList<TCarta>);
+
+    public
+
+    property Monte : TList<TCarta> read FMonte write SetMonte;
+
+  end;
+
+implementation
+
+{ TMonte }
+
+
+end.
